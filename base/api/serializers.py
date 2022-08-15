@@ -5,7 +5,7 @@ from base.models import Factory, Product
 class ProductSerializer(ModelSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'factory', 'title', 'quantity')
+        fields = ('id', 'factory', 'title', 'quantity', 'description')
 
 class FactorySerializer(ModelSerializer):
     productsInFactory=ProductSerializer(many=True)
