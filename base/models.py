@@ -17,6 +17,7 @@ class Product(models.Model):
     factory = models.ForeignKey(Factory, on_delete=models.CASCADE, null = True, related_name="productsInFactory")
     title = models.CharField(max_length=100)
     quantity = models.IntegerField()
+    description = models.CharField(max_length=100, null = True)
 
     def __str__(self):
         return f'{self.title}'
