@@ -1,8 +1,14 @@
 
 from django.db import models
 
-# Create your models here.
+from django.utils.translation import gettext_lazy as _
 
+
+
+def upload_to(instance, filename):
+    return f'posts/{filename}'
+
+# Create your models here.
 #creating model for list of factories
 class Factory(models.Model):
     # by default the models are gonna create the ID value in integers. you could use UUID as well. 
@@ -18,6 +24,8 @@ class Product(models.Model):
     title = models.CharField(max_length=100)
     quantity = models.IntegerField()
     description = models.CharField(max_length=100, null = True, blank=True)
+
+    image = models.ImageField(_("Image"), upload_to = upload_to, default = 'posts/default.jpg')
 
     def __str__(self):
         return f'{self.title}'
