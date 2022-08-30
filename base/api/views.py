@@ -2,6 +2,9 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from rest_framework.decorators import parser_classes
+from rest_framework.parsers import MultiPartParser, FormParser
+
 # import the factory model now.
 from base.models import Factory
 #importing the serializer as well
@@ -31,7 +34,8 @@ def getFactories(request):
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST'])
-def getAFactory(request, factoryId):
+@parser_classes([MultiPartParser, FormParser])
+def getAFactory(request, factoryId, format = None):
     if request.method == 'GET':
         try:
             products = Product.objects.filter(factory = factoryId)
@@ -48,7 +52,8 @@ def getAFactory(request, factoryId):
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def getAProduct(request, factoryId, productId):
+@parser_classes([MultiPartParser, FormParser])
+def getAProduct(request, factoryId, productId, format = None):
     try:
         product = Product.objects.filter(factory = factoryId).get(id = productId)
     except Product.DoesNotExist:
