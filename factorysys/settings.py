@@ -81,13 +81,37 @@ WSGI_APPLICATION = 'factorysys.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'mssql',
+        'PORT': '1433',
+        'NAME': 'prateek_db',
+        'USER': 'dbadmin',
+        'PASSWORD': 'Admin123',
+        'HOST': 'assessmentserverget.database.windows.net',   # Or an IP Address that your DB is hosted on
+        'OPTIONS': {
+                'driver': 'Driver={ODBC Driver 13 for SQL Server};Server=tcp:assessmentserverget.database.windows.net,1433;Database=prateek_db;Uid=dbadmin;Pwd=Admin123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;',
+            },
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'NAME': 'DB_NAME',
+#         'USER': 'DB_USER',
+#         'PASSWORD': 'DB_PASSWORD',
+#         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#         'PORT': '3306',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
